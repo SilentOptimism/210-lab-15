@@ -1,5 +1,4 @@
 #include <iostream>
-#include <iomanip>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -25,7 +24,7 @@ public:
     int getYear()               {return year ;}
 
     void print(){
-        cout << "Movie: " << screenWriter << endl;
+        cout << "Movie: " << title << endl;
         cout << "     Year released: " << year << endl;
         cout << "     ScreenWriter: "  << screenWriter << endl;
 
@@ -50,19 +49,19 @@ int main(int argc, char const *argv[])
     string ScreenWriter;
     string Year;
 
-    while(fin){
-        getline(fin , Title);
+    while(getline(fin , Title)){
+        
         getline(fin , Year);
         getline(fin , ScreenWriter);
 
         Movie temp = Movie(Title, ScreenWriter, stoi(Year));
 
         movies.push_back(temp);
-        movies.at(0).print();
     }
 
-
-
+    for(Movie film : movies){
+        film.print();
+    }
 
     return 0;
 }
