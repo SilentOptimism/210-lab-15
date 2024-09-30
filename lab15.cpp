@@ -9,6 +9,7 @@ using namespace std;
 class Movie
 {
 private:
+    // Private members
     string screenWriter;
     string title;
     int year;
@@ -36,22 +37,24 @@ public:
 
 };
 
+// Function Headers
 void fileToMovieList(vector<Movie> &movies);
 void printMovieList(vector<Movie> &movies);
 
 int main(int argc, char const *argv[])
 {
+    
     vector<Movie> blockBusters;
 
     fileToMovieList(blockBusters);
     printMovieList(blockBusters);
 
-
-
     return 0;
 }
 
-//fileToMovieList: takes
+// fileToMovieList() fills a movie vector with data from a movie file
+// arguments: vector<Movie> &movies (modifies vector)
+// returns: nothing fills vector
 void fileToMovieList(vector<Movie> &movies){
     ifstream fin;
     fin.open("Movies.txt");
@@ -65,13 +68,14 @@ void fileToMovieList(vector<Movie> &movies){
     string ScreenWriter;
     string Year;
 
+    // Checks if the txt doc is at the end
     while(getline(fin , Title)){
         
         getline(fin , Year);
         getline(fin , ScreenWriter);
 
+        // Creates a temporary Movie object and appends it to our vector
         Movie temp = Movie(Title, ScreenWriter, stoi(Year));
-
         movies.push_back(temp);
     }
 
@@ -79,8 +83,12 @@ void fileToMovieList(vector<Movie> &movies){
     fin.close();
 }
 
-// printVectorMovie prints the full array of vectors
+// printVectorMovie() takes prints a vector list of movie vectors
+// arguments: vector<Movie> &movies
+// returns: nothing prints to console
 void printMovieList(vector<Movie> &movies){
+
+    // Uses a for each loop to print objects in the vector
     for(Movie film : movies){
         film.print();
     }
