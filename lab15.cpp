@@ -29,6 +29,8 @@ public:
         cout << "     Year released: " << year << endl;
         cout << "     ScreenWriter: "  << screenWriter << endl;
 
+        cout << endl;
+
     }
 };
 
@@ -37,27 +39,27 @@ int main(int argc, char const *argv[])
     ifstream fin;
     fin.open("movies.txt");
 
-    if(fin){
+    if(!fin){
         cerr << "Unable to open movies file" << endl;
         return 0;
     }
 
-    vector <Movie> movies;
+    vector <Movie> movies = {};
 
     string Title;
     string ScreenWriter;
     string Year;
 
-    getline(fin , Title);
-    getline(fin , ScreenWriter);
-    getline(fin , Year);
+    while(fin){
+        getline(fin , Title);
+        getline(fin , Year);
+        getline(fin , ScreenWriter);
 
-    Movie temp = Movie(Title, ScreenWriter, stoi(Year));
-    
+        Movie temp = Movie(Title, ScreenWriter, stoi(Year));
 
-    movies.push_back(temp);
-
-    movies.at(0).print();
+        movies.push_back(temp);
+        movies.at(0).print();
+    }
 
 
 
