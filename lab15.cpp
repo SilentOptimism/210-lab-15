@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <string>
 #include <vector>
 
 using namespace std;
@@ -13,7 +14,7 @@ private:
     int year;
     
 public:
-    Movie(){};
+    Movie(string ScreenWriter, string Title, int Year) : screenWriter{ScreenWriter}, title{Title}, year{Year} {};
 
     void setScreenWriter(string ScreenWriter)   {screenWriter = ScreenWriter;}
     void setTitle(string Title)                 {title = Title;}
@@ -37,22 +38,29 @@ int main(int argc, char const *argv[])
     fin.open("movies.txt");
 
     if(fin){
-        cout << "Unable to open movies file" << endl;
+        cerr << "Unable to open movies file" << endl;
+        return 0;
     }
 
     vector <Movie> movies;
 
+    string Title;
+    string ScreenWriter;
+    string Year;
+
+    getline(fin , Title);
+    getline(fin , ScreenWriter);
+    getline(fin , Year);
+
+    Movie temp = Movie(Title, ScreenWriter, stoi(Year));
+    
+
+    movies.push_back(temp);
+
+    movies.at(0).print();
 
 
 
-
-    Movie test = Movie();
-
-    test.setScreenWriter("Writer");
-    test.setTitle("THE MOVIE");
-    test.setYear(2023);
-
-    test.print();
 
     return 0;
 }
